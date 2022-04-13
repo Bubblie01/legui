@@ -1,14 +1,13 @@
 package com.spinyowl.legui.config;
 
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+import com.google.gson.reflect.TypeToken;
 import com.spinyowl.legui.input.KeyCode;
 import com.spinyowl.legui.input.Keyboard;
 import com.spinyowl.legui.input.Shortcut;
 import com.spinyowl.legui.util.IOUtil;
-import com.squareup.moshi.JsonAdapter;
-import com.squareup.moshi.Moshi;
-import com.squareup.moshi.Types;
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
 import java.util.Map;
 
 public class Configuration {
@@ -35,10 +34,9 @@ public class Configuration {
   private Map<String, Map<KeyCode, Integer>> keyboardLayouts;
 
   private static void initialize() {
-    Moshi moshi = new Moshi.Builder().build();
-    JsonAdapter<Configuration> configurationAdapter = moshi.adapter(Configuration.class);
-    ParameterizedType mapType = Types.newParameterizedType(Map.class, String.class, Object.class);
-    JsonAdapter<Map<String, Object>> mapAdapter = moshi.adapter(mapType);
+    Gson moshi = new Gson();
+    TypeAdapter<Configuration> configurationAdapter = moshi.getAdapter(Configuration.class);
+    TypeAdapter<Map<String, Object>> mapAdapter = moshi.getAdapter(new TypeToken<>() {});
     try {
       Map<String, Object> initialJson = getJson("defaultLegui.json", mapAdapter, Map.of());
       Map<String, Object> importedJson = getJson("legui.json", mapAdapter, null);
@@ -56,7 +54,7 @@ public class Configuration {
     }
   }
 
-  private static Map<String, Object> getJson(String path, JsonAdapter<Map<String, Object>> adapter,
+  private static Map<String, Object> getJson(String path, TypeAdapter<Map<String, Object>> adapter,
       Map<String, Object> defaultJson) {
     try {
       String json = IOUtil.resourceToString(path);
