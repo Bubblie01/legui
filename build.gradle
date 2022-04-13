@@ -37,15 +37,11 @@ javadoc.options.encoding = 'UTF-8'
 
 repositories {
     mavenCentral()
-    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     maven { url "https://raw.githubusercontent.com/SpinyOwl/repo/releases" }
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.reflections/reflections
-    api group: 'org.reflections', name: 'reflections', version: '0.10.2'
-
     //@formatter:off
     api group: "org.joml", name: "joml", version: joml_version
     api group: 'commons-io', name: 'commons-io', version: commons_io
@@ -77,10 +73,6 @@ dependencies {
         api group: 'org.lwjgl', name: 'lwjgl-yoga', version: lwjgl_version, classifier: c
     }
     //@formatter:on
-
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
     configurations.all {
         resolutionStrategy.eachDependency { DependencyResolveDetails details ->
