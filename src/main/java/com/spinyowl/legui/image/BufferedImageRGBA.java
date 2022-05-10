@@ -18,6 +18,8 @@ public class BufferedImageRGBA extends Image {
   private volatile int readPB = 1;
   private volatile int writePB = 0;
 
+  private boolean filteringNearest;
+
 
   public BufferedImageRGBA(int width, int height) {
     this.width = width;
@@ -59,6 +61,14 @@ public class BufferedImageRGBA extends Image {
 
   public ByteBuffer getImageData() {
     return byteBuffers[readPB];
+  }
+
+  public boolean isFilteringNearest() {
+    return filteringNearest;
+  }
+
+  public void setFilteringNearest(boolean filteringNearest) {
+    this.filteringNearest = filteringNearest;
   }
 
 

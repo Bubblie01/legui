@@ -29,8 +29,8 @@ public class NvgBufferedImageRGBARenderer extends NvgImageRenderer<BufferedImage
         String path = getPath.apply(image);
         try {
           imageRef = manager.getImageCache().get(path, () -> {
-            int reference = nvgCreateImageRGBA(context, image.getWidth(), image.getHeight(), 0,
-                image.getImageData());
+            int reference = nvgCreateImageRGBA(context, image.getWidth(), image.getHeight(),
+                image.isFilteringNearest() ? NanoVG.NVG_IMAGE_NEAREST : 0, image.getImageData());
             manager.getImageAssociationMap().put(getPath.apply(image), reference);
             return reference;
           });

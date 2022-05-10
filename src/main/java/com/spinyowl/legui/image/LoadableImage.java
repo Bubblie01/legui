@@ -15,6 +15,7 @@ public abstract class LoadableImage extends Image {
    * Path to image source.
    */
   private String path;
+  private boolean filteringNearest;
 
 
   /**
@@ -70,6 +71,14 @@ public abstract class LoadableImage extends Image {
    */
   public void setPath(String path) {
     this.path = path;
+  }
+
+  public boolean isFilteringNearest() {
+    return filteringNearest;
+  }
+
+  public void setFilteringNearest(boolean filteringNearest) {
+    this.filteringNearest = filteringNearest;
   }
 
   /**

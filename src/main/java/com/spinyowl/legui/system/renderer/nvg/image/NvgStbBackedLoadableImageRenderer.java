@@ -39,8 +39,8 @@ public class NvgStbBackedLoadableImageRenderer extends NvgImageRenderer<StbBacke
       int reference = 0;
       ByteBuffer imageData = image.getImageData();
       if (imageData != null) {
-        reference = NanoVG.nvgCreateImageRGBA(context, image.getWidth(), image.getHeight(), 0,
-            imageData);
+        reference = NanoVG.nvgCreateImageRGBA(context, image.getWidth(), image.getHeight(),
+            image.isFilteringNearest() ? NanoVG.NVG_IMAGE_NEAREST : 0, imageData);
       }
       manager.getImageAssociationMap().put(image.getPath(), reference);
       return reference;
